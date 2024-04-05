@@ -26,6 +26,14 @@ public class DucksRepository {
         if(!ducksAudioDirectory.exists()) {
             ducksAudioDirectory.mkdirs();
         }
+        File ducksDatabase = new File(DATABASE_NAME);
+        if(!ducksDatabase.exists()) {
+            try {
+                ducksDatabase.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private String IMAGES_FOLDER_PATH = "ducks/images/";
@@ -50,7 +58,7 @@ public class DucksRepository {
         int id = maxId + 1;
         Path path = Paths.get(DATABASE_NAME);
         String data = duckData.toLine(id);
-        appendToFile(path, data + NEW_LINE);
+        appendToFile(path, data + "\n");
         return id;
     }
 
